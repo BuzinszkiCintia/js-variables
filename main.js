@@ -35,8 +35,39 @@ function main() { //ez a belépési function ennek érdemes ugyanazt a nevet adn
         }
     }
 }
+
+function displayDetails(product) {// ez egy darab objektum lesz
+    let stock = product.stock;
+    let price = product.price;
+    let value = stock * price;
+    let name = product.name;
+    let attachments = product.attachements;
+    let productDetailsDiv = document.createElement("div");
+    productDetailsDiv.className = "product-details";// a html class nevét adjuk meg
+    productDetailsDiv.innerText = name + ": " + value + " " + attachments.join(",");
+    document.getElementById("container").append(productDetailsDiv);
+
+    
+    let available = stock > 5;// ennek true vagy false lesz az értéke
+    let stockInfoDiv = document.createElement("div");
+    stockInfoDiv.className = "stock-info";
+
+    if (available){ // azért nem kell külön feltétel "available === true" mert az első ágban mindig a true-ba fut be
+        stockInfoDiv.innerText = "Elérhető";
+    }else{
+        stockInfoDiv.innerText = "Nem Elérhető";
+    }
+    productDetailsDiv.append(stockInfoDiv);
+
+    let special = customer === "Ádám"; //Nem egyenlő: !== 
+    if (!available && special){
+        stockInfoDiv.innerText = stockInfoDiv.innerText + "(De neki mégis)";
+    }
+
+}
+
 function inventory() {
-    let stock = products[2].stock;
+   /* let stock = products[2].stock;
     let price = products[2].price;
     let value = stock * price;
     let div = document.createElement("div");//ide valódi html elementeket illik beírni
@@ -55,22 +86,13 @@ function inventory() {
     value = stock * price;
     div = document.createElement("div");
     div.innerText = products[1].name + " : " + value;
-    document.body.append(div);
+    document.body.append(div);*/
 
-    stock = products[0].stock;
-    let available = stock > 5;// ennek true vagy false lesz az értéke
-    div = document.createElement("div");
-    if (available){ // azért nem kell külön feltétel "available === true" mert az első ágban mindig a true-ba fut be
-        div.innerText = products[0].name + ": " + "Elérhető";
-    }else{
-        div.innerText = products[0].name + ": " + "Nem Elérhető";
-    }
-    document.body.append(div);
+    displayDetails(products[0]);//amit itt megadsz a zárójelbe azt a tömb elemet fogja beadni fent a displaydetails függvény product változójába
+    displayDetails(products[1]);
+    displayDetails(products[2]);
 
-    let special = customer === "Ádám"; //Nem egyenlő: !== 
-    if (!available && special){
-        div.innerText = div.innerText + "(De neki mégis)";
-    }
+
 
 }
 

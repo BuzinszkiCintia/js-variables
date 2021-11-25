@@ -1,0 +1,11 @@
+#container {/*táblázatba rendeztük a conntainert*/
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+   
+}
+.product-details{
+    box-shadow: 0px 0px 2px 1px #00000069;
+    border-radius: 8px;
+
+}
